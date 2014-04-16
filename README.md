@@ -1,12 +1,11 @@
-# broccoli-es6-concatenator
+# broccoli-es6-module-transpiler
 
-Transpile ES6 modules and concatenate them, recursively including modules
-referenced by `import` statements.
+Transpile ES6 modules to AMD modules.
 
 ## Installation
 
 ```bash
-npm install --save-dev broccoli-es6-concatenator
+npm install --save-dev broccoli-es6-module-transpiler
 ```
 
 ## Usage
@@ -14,26 +13,16 @@ npm install --save-dev broccoli-es6-concatenator
 Note: The API will change in subsequent 0.x versions.
 
 ```js
-var compileES6 = require('broccoli-es6-concatenator');
+var compileES6 = require('broccoli-es6-module-transpiler');
 var applicationJs = compileES6(sourceTree, {
-  loaderFile: 'loader.js',
   ignoredModules: [
     'resolver'
   ],
-  inputFiles: [
-    'todomvc/**/*.js'
-  ],
-  legacyFilesToAppend: [
-    'jquery.js',
-    'handlebars.js',
-    'ember.js',
-  ],
-  wrapInEval: true,
-  outputFile: '/assets/application.js'
+  wrapInEval: true
 });
 ```
 
 ### Options
 
 * `.wrapInEval` (boolean): Enable or disable wrapping each module in an `eval`
-  call with a `//# sourceURL` comment. Defaults to true, though this may change in the future.
+  call with a `//# sourceURL` comment. Defaults to false.
